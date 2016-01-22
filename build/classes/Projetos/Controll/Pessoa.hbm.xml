@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/01/2016 10:59:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Projetos.Controll.Pessoa" table="pessoa" schema="public" optimistic-lock="version">
+        <id name="codpess" type="int">
+            <column name="codpess" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cidade" class="Projetos.Controll.Cidade" fetch="select">
+            <column name="codcid" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cliente" class="Projetos.Controll.Cliente" fetch="select">
+            <column name="codcli" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="100" not-null="true" />
+        </property>
+        <property name="endereco" type="string">
+            <column name="endereco" length="150" not-null="true" />
+        </property>
+        <property name="tipo" type="java.lang.Character">
+            <column name="tipo" length="1" />
+        </property>
+        <property name="admissao" type="date">
+            <column name="admissao" length="13" />
+        </property>
+        <set name="participanteativs" table="participanteativ" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codpess" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Participanteativ" />
+        </set>
+        <one-to-one name="person" class="Projetos.Controll.Person"></one-to-one>
+    </class>
+</hibernate-mapping>

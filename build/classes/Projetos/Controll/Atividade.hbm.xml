@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/01/2016 10:59:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Projetos.Controll.Atividade" table="atividade" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="Projetos.Controll.AtividadeId">
+            <key-property name="idproj" type="string">
+                <column name="idproj" length="10" />
+            </key-property>
+            <key-property name="sequencia" type="int">
+                <column name="sequencia" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="fase" class="Projetos.Controll.Fase" fetch="select">
+            <column name="codfase" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="200" not-null="true" />
+        </property>
+        <property name="datainiprev" type="date">
+            <column name="datainiprev" length="13" not-null="true" />
+        </property>
+        <property name="datafimprev" type="date">
+            <column name="datafimprev" length="13" not-null="true" />
+        </property>
+        <property name="datainireal" type="date">
+            <column name="datainireal" length="13" />
+        </property>
+        <property name="datafimreal" type="date">
+            <column name="datafimreal" length="13" />
+        </property>
+        <property name="horainiprev" type="string">
+            <column name="horainiprev" length="5" />
+        </property>
+        <property name="horafimprev" type="string">
+            <column name="horafimprev" length="5" />
+        </property>
+        <property name="horainireal" type="string">
+            <column name="horainireal" length="5" />
+        </property>
+        <property name="horafimreal" type="string">
+            <column name="horafimreal" length="5" />
+        </property>
+        <property name="duracaoest" type="big_decimal">
+            <column name="duracaoest" precision="13" scale="3" not-null="true" />
+        </property>
+        <property name="duracaoreal" type="big_decimal">
+            <column name="duracaoreal" precision="13" scale="3" />
+        </property>
+        <property name="custoest" type="big_decimal">
+            <column name="custoest" precision="13" scale="3" not-null="true" />
+        </property>
+        <property name="custoreal" type="big_decimal">
+            <column name="custoreal" precision="13" scale="3" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="50" not-null="true" />
+        </property>
+        <set name="dependeciaativs" table="dependeciaativ" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproj" length="10" not-null="true" />
+                <column name="sequencia" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Dependeciaativ" />
+        </set>
+        <set name="participanteativs" table="participanteativ" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproj" length="10" not-null="true" />
+                <column name="sequencia" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Participanteativ" />
+        </set>
+        <set name="ocorrencias" table="ocorrencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproj" length="10" not-null="true" />
+                <column name="sequencia" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Ocorrencia" />
+        </set>
+    </class>
+</hibernate-mapping>

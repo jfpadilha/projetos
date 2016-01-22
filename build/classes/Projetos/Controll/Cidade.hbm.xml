@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/01/2016 10:59:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Projetos.Controll.Cidade" table="cidade" schema="public" optimistic-lock="version">
+        <id name="codcid" type="int">
+            <column name="codcid" />
+            <generator class="assigned" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="100" />
+        </property>
+        <property name="uf" type="string">
+            <column name="uf" length="25" />
+        </property>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codcid" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Cliente" />
+        </set>
+        <set name="pessoas" table="pessoa" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codcid" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Pessoa" />
+        </set>
+    </class>
+</hibernate-mapping>

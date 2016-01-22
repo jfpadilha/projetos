@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/01/2016 10:59:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Projetos.Controll.Fase" table="fase" schema="public" optimistic-lock="version">
+        <id name="codfase" type="int">
+            <column name="codfase" />
+            <generator class="assigned" />
+        </id>
+        <property name="nome" type="string">
+            <column name="nome" length="100" />
+        </property>
+        <set name="projetos" table="faseprojeto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codfase" not-null="true" />
+            </key>
+            <many-to-many entity-name="Projetos.Controll.Projeto">
+                <column name="idproj" length="10" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="atividades" table="atividade" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codfase" not-null="true" />
+            </key>
+            <one-to-many class="Projetos.Controll.Atividade" />
+        </set>
+    </class>
+</hibernate-mapping>

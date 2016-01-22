@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/01/2016 10:59:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Projetos.Controll.Participanteativ" table="participanteativ" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="Projetos.Controll.ParticipanteativId">
+            <key-property name="idproj" type="string">
+                <column name="idproj" length="10" />
+            </key-property>
+            <key-property name="sequencia" type="int">
+                <column name="sequencia" />
+            </key-property>
+            <key-property name="codpess" type="int">
+                <column name="codpess" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="atividade" class="Projetos.Controll.Atividade" update="false" insert="false" fetch="select">
+            <column name="idproj" length="10" not-null="true" />
+            <column name="sequencia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="funcao" class="Projetos.Controll.Funcao" fetch="select">
+            <column name="codfunc" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pessoa" class="Projetos.Controll.Pessoa" update="false" insert="false" fetch="select">
+            <column name="codpess" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

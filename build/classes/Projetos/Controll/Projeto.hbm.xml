@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 22/01/2016 10:59:18 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Projetos.Controll.Projeto" table="projeto" schema="public" optimistic-lock="version">
+        <id name="idproj" type="string">
+            <column name="idproj" length="10" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cliente" class="Projetos.Controll.Cliente" fetch="select">
+            <column name="codcli" not-null="true" />
+        </many-to-one>
+        <property name="nome" type="string">
+            <column name="nome" length="100" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="100" not-null="true" />
+        </property>
+        <property name="datainiprev" type="date">
+            <column name="datainiprev" length="13" not-null="true" />
+        </property>
+        <property name="datafimprev" type="date">
+            <column name="datafimprev" length="13" not-null="true" />
+        </property>
+        <property name="datainireal" type="date">
+            <column name="datainireal" length="13" />
+        </property>
+        <property name="datafimreal" type="date">
+            <column name="datafimreal" length="13" />
+        </property>
+        <property name="custoest" type="big_decimal">
+            <column name="custoest" precision="12" scale="3" />
+        </property>
+        <set name="fases" table="faseprojeto" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="idproj" length="10" not-null="true" />
+            </key>
+            <many-to-many entity-name="Projetos.Controll.Fase">
+                <column name="codfase" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

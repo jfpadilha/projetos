@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="projetos" match-schema="public"/>
+  <table-filter match-name="ocorrencia"/>
+  <table-filter match-name="atividade"/>
+  <table-filter match-name="cidade"/>
+  <table-filter match-name="dependeciaativ"/>
+  <table-filter match-name="person"/>
+  <table-filter match-name="funcao"/>
+  <table-filter match-name="pessoa"/>
+  <table-filter match-name="participanteativ"/>
+  <table-filter match-name="fase"/>
+  <table-filter match-name="projeto"/>
+  <table-filter match-name="cliente"/>
+  <table-filter match-name="faseprojeto"/>
+</hibernate-reverse-engineering>
