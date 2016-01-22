@@ -1,6 +1,8 @@
 package DAO;
 
 import Projetos.Controll.Cidade;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
 
@@ -56,6 +58,56 @@ public class DAOCidade
         catch ( Exception e )
         {
             System.out.println("Erro-->   " + e);
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void deleteCidade( Cidade cidade )
+    {
+        //criar uma sessao
+        Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
+
+        try
+        {
+            session.beginTransaction();             //abrir a sessao
+            session.delete(cidade);                 //dizer o que fazer com o object
+            session.getTransaction().commit();      //efetuar a operacao
+            JOptionPane.showMessageDialog(null, "Deleted successfully!");
+        }
+        catch ( Exception e )
+        {
+            System.out.println("Erro: " + e);
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public void listCidade()
+    {
+        //criar uma sessao
+        Session session = DAOHibernateUtil.getSessionFactory().getCurrentSession();
+
+        try
+        {
+            session.beginTransaction();             //abrir a sessao
+
+            //criar uma lista a partir da DB
+            List listaCidade = session.createQuery("FROM Cidade").list();
+
+            //Iterador que vai preencher o objeto city com o que veio da base
+            for ( Iterator iterator = listaCidade.iterator(); iterator.hasNext(); )
+            {
+                Cidade city = (Cidade) iterator.next();
+                System.out.println("Código " + city.getCodcid());
+                System.out.println("Cidade: " + city.getNome());
+                System.out.println("UF: " + city.getUf());
+                System.out.println("Cliente: " + city.getClientes());
+            }
+
+            JOptionPane.showMessageDialog(null, "Listed successfully!!!");
+        }
+        catch ( Exception e )
+        {
+            System.out.println("erro: " + e);
             JOptionPane.showMessageDialog(null, e);
         }
     }
