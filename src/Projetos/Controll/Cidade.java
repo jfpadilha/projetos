@@ -84,7 +84,7 @@ public class Cidade implements java.io.Serializable
     {
         this.pessoas = pessoas;
     }
-
+    
     //Other methods
     public void insertCidade()
     {
